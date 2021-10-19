@@ -41,16 +41,16 @@ print(tb(table, headers='firstrow'))
 #Section B
 
 #b.i
-# def get_degree_distribution(G):
-#     d = []
-#     for n in G.nodes():
-#         d.append(G.degree(n))
+def get_degree_distribution(G):
+    d = []
+    for n in G.nodes():
+        d.append(G.degree(n))
     
-#     plt.hist(d)
-#     plt.show()
+    plt.hist(d)
+    plt.show()
 
-# for g in gcc_arr:
-#     get_degree_distribution(g)
+for g in gcc_arr:
+    get_degree_distribution(g)
 
 #b.ii
 def get_local_clusteirng_distribution(G):
@@ -59,17 +59,16 @@ def get_local_clusteirng_distribution(G):
     for n in G.nodes():
         links = 0
         #get the nodes neighbors
-        neighbors = []
-        for neighbor in nx.neighbors(G, n):
-            neighbors.append(neighbor)
+        neighbors = nx.neighbors(G, n)
 
+        #find all neighbors of 'n' that have an edge
         if len(neighbors) > 1:
             for n1 in neighbors:
                 for n2 in neighbors:
                     if G.has_edge(n1, n2):
                         links += 1
  
-            links /= 2
+            links /= 2 #not sure if this step is needed, edges are counted twice in the nested loop above
             coefficient = links / (len(neighbors) * (len(neighbors) - 1))
             coefficients.append(coefficient)
 
@@ -82,3 +81,4 @@ for g in gcc_arr:
     c = get_local_clusteirng_distribution(g)
     plt.hist(c)
     plt.show()
+
