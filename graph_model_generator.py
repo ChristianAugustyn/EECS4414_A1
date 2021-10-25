@@ -68,67 +68,57 @@ print(tb(table, headers="firstrow"))
 #######
 # b.i #
 #######
-# def get_degree_distribution(G):
-#     d = []
-#     for n in G.nodes():
-#         d.append(G.degree(n))
 
-#     plt.hist(d)
-#     plt.title("Graph title")
-#     plt.xlabel("X axis label")
-#     plt.ylabel("Y axis label")
-#     plt.show()
+def get_degree_distribution(name, G):
+    node_degree_dist = [x[1] for x in G.degree()]
 
-# for g in gcc_arr:
-#     get_degree_distribution(g)
+    plt.hist(node_degree_dist)
+    plt.title(f"[b.i] {name}: Distribution of Node Degrees")
+    plt.xlabel("Node Degree")
+    plt.ylabel("Count")
+    plt.show()
+
+
+for name, g in zip(graphs.keys(), gcc_arr):
+    get_degree_distribution(name, g)
+
 
 ########
 # b.ii #
 ########
-# def get_local_clusteirng_distribution(G):
-#     coefficients = []
-#     n = 1
-#     for n in G.nodes():
-#         links = 0
-#         #get the nodes neighbors
-#         for neighbor in nx.neighbors(G, n):
-            # neighbors.append(neighbor)
-# 
-#         #find all neighbors of 'n' that have an edge
-#         if len(neighbors) > 1:
-#             for n1 in neighbors:
-#                 for n2 in neighbors:
-#                     if G.has_edge(n1, n2):
-#                         links += 1
 
-#             links /= 2 #not sure if this step is needed, edges are counted twice in the nested loop above
-#             coefficient = links / (len(neighbors) * (len(neighbors) - 1))
-#             coefficients.append(coefficient)
+def get_local_clusteirng_distribution(name, G):
+    clustering_coeff = list(nx.clustering(G).values())
+    plt.hist(clustering_coeff)
+    plt.title(f"[b.ii] {name}: Distribution of Local Clustering Coefficients")
+    plt.xlabel("Clustering Coefficient")
+    plt.ylabel("Count")
+    plt.show()
 
-#         print(n)
-#         n += 1
 
-#     return coefficients
+get_local_clusteirng_distribution("test", gcc_arr[0])
+for name, g in zip(graphs.keys(), gcc_arr):
+    get_local_clusteirng_distribution(name, g)
 
-# for g in gcc_arr:
-#     c = get_local_clusteirng_distribution(g)
-#     plt.hist(c)
-#     plt.show()
 
 #########
 # b.iii #
 #########
-# for name, g in zip(graphs.keys(), gcc_arr):
-print()
-print(name)
-print(f"[b.v]\tGlobal Clustering Coefficient: {nx.clustering(gcc_arr[8])}")
+
+for name, g in zip(graphs.keys(), gcc_arr):
+    print()
+    print(name)
+    print(f"[b.iii]\tGlobal Clustering Coefficient: {nx.average_clustering(g)}")
+
 
 ###################
 # b.iv, b.v, b.vi #
 ###################
+
 def get_shortest_path_stats(name, G):
     path_length_dict = dict(nx.all_pairs_shortest_path_length(G))
-    path_length_per_origin = [list(node.values()) for node in path_length_dict.values()]
+    path_length_per_origin = [list(node.values())
+                              for node in path_length_dict.values()]
     path_lengths = [
         length
         for origin_length_list in path_length_per_origin
@@ -137,10 +127,10 @@ def get_shortest_path_stats(name, G):
     # paths of length 0 are ignored
     path_lengths_without_zeros = list(filter(lambda x: x != 0, path_lengths))
 
-    # plt.hist(path_lengths)
-    # plt.title(f"[b.iv] {name}: Distribution of Shortest Path Lengths")
-    # plt.xlabel("Shortest Path Length")
-    # plt.ylabel("Count")
+    plt.hist(path_lengths)
+    plt.title(f"[b.iv] {name}: Distribution of Shortest Path Lengths")
+    plt.xlabel("Shortest Path Length")
+    plt.ylabel("Count")
     plt.show()
 
     print()
@@ -151,6 +141,5 @@ def get_shortest_path_stats(name, G):
     print(f"[b.vi]\tDiameter: {max(path_lengths_without_zeros)}")
 
 
-# for name, g in zip(graphs.keys(), gcc_arr):
-#     get_shortest_path_stats(name, g)
-# get_shortest_path_stats("test", gcc_arr[1])
+for name, g in zip(graphs.keys(), gcc_arr):
+    get_shortest_path_stats(name, g)
