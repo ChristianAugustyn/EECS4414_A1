@@ -10,18 +10,18 @@ n = 1000
 #############
 
 # Erdös-Rényi random graph
-er1 = nx.erdos_renyi_graph(n, 0.001)
-er2 = nx.erdos_renyi_graph(n, 0.5)
-er3 = nx.erdos_renyi_graph(n, 0.1)
+er1 = nx.erdos_renyi_graph(n, 0.02002)
+er2 = nx.erdos_renyi_graph(n, 0.02002)
+er3 = nx.erdos_renyi_graph(n, 0.02002)
 
 # Watts–Strogatz small-world graph
-ws1 = nx.watts_strogatz_graph(n, 2, 0.5)
-ws2 = nx.watts_strogatz_graph(n, 5, 0.5)
-ws3 = nx.watts_strogatz_graph(n, 10, 0.5)
+ws1 = nx.watts_strogatz_graph(n, 20, 0.5)
+ws2 = nx.watts_strogatz_graph(n, 20, 0.5)
+ws3 = nx.watts_strogatz_graph(n, 20, 0.5)
 
 # Barabási–Albert preferential attachment model
-ba1 = nx.barabasi_albert_graph(n, 2)
-ba2 = nx.barabasi_albert_graph(n, 5)
+ba1 = nx.barabasi_albert_graph(n, 10)
+ba2 = nx.barabasi_albert_graph(n, 10)
 ba3 = nx.barabasi_albert_graph(n, 10)
 
 graphs = {
@@ -96,7 +96,6 @@ def get_local_clusteirng_distribution(name, G):
     plt.show()
 
 
-get_local_clusteirng_distribution("test", gcc_arr[0])
 for name, g in zip(graphs.keys(), gcc_arr):
     get_local_clusteirng_distribution(name, g)
 
