@@ -1,3 +1,12 @@
+############################################
+# EECS 4414 Infomation Networks
+# York University Fall 2021
+# Assignment 1
+# October 25, 2021
+# Hong Chen, hjc@my.yorku.ca
+# Christian Augustyn, chrisaug@my.yorku.ca
+############################################
+
 import networkx as nx
 import matplotlib.pyplot as plt
 from networkx.classes.function import neighbors
