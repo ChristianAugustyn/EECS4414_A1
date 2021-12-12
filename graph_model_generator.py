@@ -78,6 +78,7 @@ print(tb(table, headers="firstrow"))
 # b.i #
 #######
 
+
 def get_degree_distribution(name, G):
     node_degree_dist = [x[1] for x in G.degree()]
 
@@ -116,7 +117,8 @@ for name, g in zip(graphs.keys(), gcc_arr):
 for name, g in zip(graphs.keys(), gcc_arr):
     print()
     print(name)
-    print(f"[b.iii]\tGlobal Clustering Coefficient: {nx.average_clustering(g)}")
+    print(
+        f"[b.iii]\tGlobal Clustering Coefficient: {nx.average_clustering(g)}")
 
 
 ###################
