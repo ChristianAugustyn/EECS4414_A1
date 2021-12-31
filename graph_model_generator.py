@@ -92,8 +92,8 @@ print(tb(table, headers="firstrow"))
 #         links = 0
 #         #get the nodes neighbors
 #         for neighbor in nx.neighbors(G, n):
-            # neighbors.append(neighbor)
-# 
+# neighbors.append(neighbor)
+#
 #         #find all neighbors of 'n' that have an edge
 #         if len(neighbors) > 1:
 #             for n1 in neighbors:
